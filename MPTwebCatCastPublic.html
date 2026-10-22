@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lloguer d'Equipació de Moto - Vallès Occidental</title>
+    <!-- Font moderna Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0D0D0E;             /* Fons negre fosc */
+            --card-bg: #141518;             /* Fons de les targetes */
+            --card-border: #26282E;         /* Vora subtil */
+            --accent-gold-ocre: #C59B27;    /* Daurat Ocre metallitzat */
+            --accent-gold-light: #E0BA53;   /* Daurat Ocre clar */
+            --accent-gold-hover: #A37F1E;   /* Daurat Ocre fosc */
+            --text-main: #F5F5F7;           /* Text principal */
+            --text-muted: #8E8E93;          /* Text secundari */
+            --highlight-bg: rgba(197, 155, 39, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .hero {
+            position: relative;
+            background: linear-gradient(180deg, rgba(13, 13, 14, 0.65) 0%, rgba(13, 13, 14, 1) 100%), 
+                        url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 80px 20px 50px;
+            text-align: center;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+
+        .hero h1 span {
+            color: var(--accent-gold-ocre);
+            background: linear-gradient(90deg, var(--accent-gold-light), var(--accent-gold-ocre));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 20px;
+            font-weight: 500;
+        }
+
+        .badge-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(197, 155, 39, 0.15);
+            color: var(--accent-gold-light);
+            border: 1px solid var(--accent-gold-ocre);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0 10px;
+        }
+
+        .trust-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .trust-item svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent-gold-ocre);
+            flex-shrink: 0;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #FFFFFF;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+        }
+
+        .equipment-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .equipment-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold-ocre);
+            box-shadow: 0 8px 25px rgba(197, 155, 39, 0.2);
+        }
+
+        .equipment-card img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .equipment-card h4 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media(min-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        select, input[type="date"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input[type="date"]:focus {
+            outline: none;
+            border-color: var(--accent-gold-ocre);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .single-items-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            background: var(--bg-dark);
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border: 1px solid var(--card-border);
+            transition: all 0.2s ease;
+            user-select: none;
+            color: var(--text-main);
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--accent-gold-ocre);
+        }
+
+        .checkbox-item.active {
+            border-color: var(--accent-gold-ocre);
+            background-color: var(--highlight-bg);
+            font-weight: 700;
+        }
+
+        .checkbox-item.popular-pack {
+            border: 2px solid var(--accent-gold-ocre);
+            position: relative;
+        }
+
+        .badge-popular {
+            background: linear-gradient(90deg, var(--accent-gold-light), var(--accent-gold-ocre));
+            color: #000000;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-summary {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 30px 20px;
+            border-radius: 14px;
+            text-align: center;
+            border: 2px solid var(--accent-gold-ocre);
+            box-shadow: 0 0 30px rgba(197, 155, 39, 0.2);
+        }
+
+        .price-summary span {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: var(--accent-gold-light);
+        }
+
+        .price-summary .amount {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin: 10px 0;
+        }
+
+        .btn-whatsapp-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--accent-gold-ocre), var(--accent-gold-hover));
+            color: #000000;
+            text-decoration: none;
+            padding: 18px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(197, 155, 39, 0.3);
+        }
+
+        .btn-whatsapp-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(197, 155, 39, 0.4);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            background-color: var(--bg-dark);
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        tr.highlight-row {
+            background-color: var(--highlight-bg);
+        }
+
+        tr.highlight-row td {
+            color: var(--accent-gold-light);
+        }
+
+        .info-box {
+            background-color: var(--bg-dark);
+            border-left: 4px solid var(--accent-gold-ocre);
+            padding: 18px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-item svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent-gold-ocre);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>Lloguer d'Equipació <span>de Moto</span></h1>
+        <p>Especialistes en roba tècnica homologada per a pràctiques i examen de conduir.</p>
+        <span class="badge-location">📍 Vallès Occidental</span>
+    </header>
+
+    <div class="container">
+
+        <div class="trust-badges">
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <span>Equip Homologat CE</span>
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24"><path d="M13 3L4 14h7v7l9-11h-7z"/></svg>
+                <span>Recollida Ràpida</span>
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <span>Talles Disponibles S - XXL</span>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2 class="section-title">Equipació Disponible</h2>
+            <div class="equipment-gallery">
+                <div class="equipment-card">
+                    <img src="La foto del Pack Examen_page-0001.jpg" alt="Pack Examen Moto">
+                    <h4>Pack Examen</h4>
+                </div>
+                <div class="equipment-card">
+                    <img src="La foto de la Jaqueta_page-0001.jpg" alt="Jaqueta de Moto">
+                    <h4>Jaqueta</h4>
+                </div>
+                <div class="equipment-card">
+                    <img src="La foto del Pantaló_page-0001.jpg" alt="Pantaló de Moto">
+                    <h4>Pantaló</h4>
+                </div>
+                <div class="equipment-card">
+                    <img src="La foto de les Botes_page-0001.jpg" alt="Botes de Moto">
+                    <h4>Botes</h4>
+                </div>
+                <div class="equipment-card">
+                    <img src="La foto dels Guants_page-0001.jpg" alt="Guants de Moto">
+                    <h4>Guants</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2 class="section-title">Calcula i Reserva la teva Equipació</h2>
+            
+            <div class="calc-grid">
+                <div>
+                    <div class="form-group">
+                        <label for="duration">Durada del lloguer:</label>
+                        <select id="duration" onchange="calculatePrice()">
+                            <option value="1dia">1 dia</option>
+                            <option value="1setmana">1 setmana</option>
+                            <option value="2setmanes">2 setmanes</option>
+                            <option value="1mes">1 mes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tria l'opció de lloguer:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item popular-pack active" id="label-pack-examen">
+                                <div>
+                                    <input type="radio" name="pack_type" id="pack_examen" onchange="selectPack('examen')" checked> 
+                                    <strong>Pack Examen</strong> <small style="color:var(--text-muted);">(Jaqueta + Pantaló)</small>
+                                </div>
+                                <span class="badge-popular">Més Recomanat</span>
+                            </label>
+                            <label class="checkbox-item" id="label-pack-integral">
+                                <div>
+                                    <input type="radio" name="pack_type" id="pack_integral" onchange="selectPack('integral')"> 
+                                    <strong>Pack Integral</strong> <small style="color:var(--text-muted);">(Jaqueta + Pantaló + Botes + Guants)</small>
+                                </div>
+                            </label>
+                            <label class="checkbox-item" id="label-pack-custom">
+                                <div>
+                                    <input type="radio" name="pack_type" id="pack_custom" onchange="selectPack('custom')"> 
+                                    <strong>Peces per separat</strong>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="single-items-group" id="single-items-container" style="display: none; margin-top: 12px;">
+                            <label class="checkbox-item" id="label-jaqueta">
+                                <input type="checkbox" class="single-item" id="jaqueta" onchange="calculatePrice()"> Jaqueta
+                            </label>
+                            <label class="checkbox-item" id="label-pantalo">
+                                <input type="checkbox" class="single-item" id="pantalo" onchange="calculatePrice()"> Pantaló
+                            </label>
+                            <label class="checkbox-item" id="label-botes">
+                                <input type="checkbox" class="single-item" id="botes" onchange="calculatePrice()"> Botes
+                            </label>
+                            <label class="checkbox-item" id="label-guants">
+                                <input type="checkbox" class="single-item" id="guants" onchange="calculatePrice()"> Guants
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">La teva Talla:</label>
+                        <select id="size">
+                            <option value="S">Talla S</option>
+                            <option value="M" selected>Talla M</option>
+                            <option value="L">Talla L</option>
+                            <option value="XL">Talla XL</option>
+                            <option value="XXL">Talla XXL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Data d'inici de reserva:</label>
+                        <input type="date" id="date">
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <div class="price-summary" id="priceSummary">
+                        <span>Preu Total Estimat</span>
+                        <div class="amount" id="totalPrice">18 €</div>
+                        <small style="color: var(--text-muted);">Fiança segons l'equipació seleccionada</small>
+                    </div>
+
+                    <button class="btn-whatsapp-main" onclick="sendWhatsApp()">
+                        💬 Reservar per WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2 class="section-title">Taula de Tarifes</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Opció</th>
+                            <th>1 dia</th>
+                            <th>1 setmana</th>
+                            <th>2 setmanes</th>
+                            <th>1 mes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight-row">
+                            <td><strong>PACK EXAMEN ⭐</strong><br><small style="color:var(--text-main);">(Jaqueta + Pantaló)</small></td>
+                            <td><strong>18 €</strong></td>
+                            <td><strong>25 €</strong></td>
+                            <td><strong>35 €</strong></td>
+                            <td><strong>45 €</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PACK INTEGRAL</strong><br><small style="color:var(--text-muted);">(Jaqueta + Pantaló + Botes + Guants)</small></td>
+                            <td><strong>31 €</strong></td>
+                            <td><strong>43 €</strong></td>
+                            <td><strong>55 €</strong></td>
+                            <td><strong>70 €</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Jaqueta</td>
+                            <td>10 €</td>
+                            <td>15 €</td>
+                            <td>20 €</td>
+                            <td>25 €</td>
+                        </tr>
+                        <tr>
+                            <td>Pantaló</td>
+                            <td>10 €</td>
+                            <td>15 €</td>
+                            <td>20 €</td>
+                            <td>25 €</td>
+                        </tr>
+                        <tr>
+                            <td>Botes</td>
+                            <td>8 €</td>
+                            <td>12 €</td>
+                            <td>18 €</td>
+                            <td>20 €</td>
+                        </tr>
+                        <tr>
+                            <td>Guants</td>
+                            <td>5 €</td>
+                            <td>8 €</td>
+                            <td>12 €</td>
+                            <td>15 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <div><strong>Més d'1 mes?</strong> Consulta tarifes especials personalitzades directament per WhatsApp.</div>
+                </div>
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    <div><strong>Fiança:</strong> S'aplicarà una fiança en el moment del lliurament segons el conjunt d'equipació reservat.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/34699068773?text=Hola!%20Vull%20m%C3%A9s%20informaci%C3%B3%20sobre%20el%20lloguer%20d'equipaci%C3%B3%20de%20moto." class="whatsapp-float" target="_blank" aria-label="Contactar per WhatsApp">
+        <svg viewBox="0 0 32 32">
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.138-2.132c2.378 1.3 5.068 1.985 7.862 1.985 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.333c-2.492 0-4.908-0.658-7.033-1.908l-0.503-0.297-5.222 1.368 1.392-5.182-0.328-0.522c-1.368-2.183-2.09-4.717-2.09-7.308 0-7.362 5.988-13.35 13.35-13.35s13.35 5.988 13.35 13.35-5.988 13.35-13.35 13.35zM22.583 19.388c-0.36-0.18-2.13-1.052-2.46-1.172s-0.57-0.18-0.81 0.18c-0.24 0.36-0.93 1.172-1.14 1.412s-0.42 0.27-0.78 0.09c-0.36-0.18-1.52-0.56-2.895-1.787-1.070-0.955-1.793-2.135-2.003-2.495s-0.022-0.555 0.158-0.733c0.162-0.16 0.36-0.42 0.54-0.63s0.24-0.36 0.36-0.6c0.12-0.24 0.06-0.45-0.03-0.63s-0.81-1.952-1.11-2.672c-0.292-0.702-0.592-0.607-0.81-0.617s-0.45-0.010-0.69-0.010c-0.24 0-0.63 0.09-0.96 0.45s-1.26 1.232-1.26 3.002c0 1.77 1.29 3.482 1.47 3.722s2.535 3.872 6.14 5.43c0.857 0.37 1.527 0.59 2.05 0.757 0.86 0.273 1.642 0.235 2.26 0.143 0.69-0.103 2.13-0.87 2.43-1.71 0.3-0.84 0.3-1.56 0.21-1.71s-0.33-0.24-0.69-0.42z"/>
+        </svg>
+    </a>
+
+    <script>
+        const prices = {
+            packExamen: { '1dia': 18, '1setmana': 25, '2setmanes': 35, '1mes': 45 },
+            packIntegral: { '1dia': 31, '1setmana': 43, '2setmanes': 55, '1mes': 70 },
+            jaqueta: { '1dia': 10, '1setmana': 15, '2setmanes': 20, '1mes': 25 },
+            pantalo: { '1dia': 10, '1setmana': 15, '2setmanes': 20, '1mes': 25 },
+            botes: { '1dia': 8, '1setmana': 12, '2setmanes': 18, '1mes': 20 },
+            guants: { '1dia': 5, '1setmana': 8, '2setmanes': 12, '1mes': 15 }
+        };
+
+        function selectPack(type) {
+            const singleContainer = document.getElementById('single-items-container');
+            
+            document.getElementById('label-pack-examen').classList.toggle('active', type === 'examen');
+            document.getElementById('label-pack-integral').classList.toggle('active', type === 'integral');
+            document.getElementById('label-pack-custom').classList.toggle('active', type === 'custom');
+
+            if (type === 'custom') {
+                singleContainer.style.display = 'grid';
+            } else {
+                singleContainer.style.display = 'none';
+            }
+
+            calculatePrice();
+        }
+
+        function calculatePrice() {
+            const duration = document.getElementById('duration').value;
+            let total = 0;
+
+            if (document.getElementById('pack_examen').checked) {
+                total = prices.packExamen[duration];
+            } else if (document.getElementById('pack_integral').checked) {
+                total = prices.packIntegral[duration];
+            } else {
+                ['jaqueta', 'pantalo', 'botes', 'guants'].forEach(item => {
+                    const checkbox = document.getElementById(item);
+                    const label = document.getElementById('label-' + item);
+                    if (checkbox.checked) {
+                        total += prices[item][duration];
+                        label.classList.add('active');
+                    } else {
+                        label.classList.remove('active');
+                    }
+                });
+            }
+
+            document.getElementById('totalPrice').innerText = total + ' €';
+
+            const priceBox = document.getElementById('priceSummary');
+            priceBox.style.transform = 'scale(1.02)';
+            setTimeout(() => { priceBox.style.transform = 'scale(1)'; }, 150);
+        }
+
+        function sendWhatsApp() {
+            const duration = document.getElementById('duration').value;
+            const size = document.getElementById('size').value;
+            const date = document.getElementById('date').value;
+            const total = document.getElementById('totalPrice').innerText;
+            
+            let selectedItemsText = "";
+
+            if (document.getElementById('pack_examen').checked) {
+                selectedItemsText = "Pack Examen (Jaqueta + Pantaló)";
+            } else if (document.getElementById('pack_integral').checked) {
+                selectedItemsText = "Pack Integral (Jaqueta + Pantaló + Botes + Guants)";
+            } else {
+                let items = [];
+                ['jaqueta', 'pantalo', 'botes', 'guants'].forEach(item => {
+                    if (document.getElementById(item).checked) {
+                        items.push(item.charAt(0).toUpperCase() + item.slice(1));
+                    }
+                });
+
+                if (items.length === 0) {
+                    alert("Si us plau, selecciona almenys un pack o una peça solta.");
+                    return;
+                }
+                selectedItemsText = items.join(', ');
+            }
+
+            let text = `Hola! Vull reservar equipació de moto:\n\n`;
+            text += `• Concepte: ${selectedItemsText}\n`;
+            text += `• Durada: ${duration}\n`;
+            text += `• Talla: ${size}\n`;
+            if (date) text += `• Data d'inici: ${date}\n`;
+            text += `• Preu estimat: ${total}\n\n`;
+            text += `Ubicació: Vallès Occidental. Quina disponibilitat teniu?`;
+
+            const phone = "34699068773";
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        selectPack('examen');
+    </script>
+</body>
+</html>
